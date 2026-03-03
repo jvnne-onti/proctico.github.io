@@ -1,165 +1,319 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-<title> LIDYZ </title>
-<style>
-body {background-color: #DE99D6;}
-</style>
+	<!-- Nombre de inicio y plantilla de bootstrap -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda de  y  </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+	
+    <style>
+		/* colores principales de casi toda la invitacion. botones, fondos, etc */
+        :root {
+            --azul-profundo: #1e3a8a;
+            --azul-claro: #bfdbfe;
+            --blanco: #ffffff;
+            --texto: #334155;
+        }
+        /* Color de letra y fuente de todo el cuerpo de la página */
+        body { font-family: 'Lato', sans-serif; color: var(--texto); overflow-x: hidden; }
+        h1, h2, h3, .script-font { font-family: 'Great Vibes', cursive; }
+        
+        #intro-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background-color: var(--azul-profundo); /* color fondo */ color: var(--blanco); /* color letra */
+            z-index: 9999; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            transition: transform 1s ease-in-out;
+        }
+		/* boton para abrir la invitacion */
+        .btn-abrir {
+            margin-top: 20px; padding: 10px 30px; background: transparent;
+            border: 2px solid var(--blanco); color: var(--blanco);
+            font-size: 1.2rem; border-radius: 50px; transition: all 0.3s; cursor: pointer;
+        }
+        /* editar boton de abrir invitacion  */
+        .btn-abrir:hover { background: var(--blanco); /* color de fondo */ color: var(--azul-profundo); /* color de la letra */ }
+
+        .hero-section { min-height: 100vh; display: flex; align-items: center; background-color: var(--blanco); }
+        .hero-img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+        .countdown-section { background-color: var(--azul-claro); /* color de fondo del contador */ padding: 80px 0; text-align: center; }
+        .timer-box {
+            display: inline-block; margin: 0 10px; background: var(--blanco);
+            padding: 15px; border-radius: 8px; min-width: 80px; color: var(--azul-profundo);
+        }
+        .timer-number { font-size: 2rem; font-weight: bold; display: block; }
+        .timer-label { font-size: 0.8rem; text-transform: uppercase; }
+		
+         /* seccion de celebracion el lugar, cambiar imagen de fondo donde esta url */
+		
+        .celebration-section {
+            padding: 100px 0; color: var(--blanco);
+            background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(30, 58, 138, 0.8)), 
+                        url('https://i.pinimg.com/736x/d3/e0/b5/d3e0b58176ca3efd857028344fd29e76.jpg');
+            background-size: cover; background-attachment: fixed; background-position: center; text-align: center;
+        } 
+
+        .btn-maps {
+            background-color: var(--blanco); color: var(--azul-profundo);
+            padding: 10px 25px; border-radius: 50px; text-decoration: none; display: inline-block;
+        }
+
+        .rsvp-section { padding: 80px 0; background-color: var(--blanco); }
+        .btn-registar { background-color: var(--azul-profundo); color: var(--blanco); width: 100%; padding: 12px; border: none; border-radius: 5px; }
+
+        .details-section { padding: 80px 0; background-color: #f8fafc; }
+        .floating-card { background: var(--blanco); padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center; height: 100%; transition: transform 0.3s; }
+        .floating-card:hover { transform: translateY(-5px); }
+        .card-icon { font-size: 2.5rem; color: var(--azul-profundo); margin-bottom: 15px; }
+        .btn-outline-custom { border: 1px solid var(--azul-profundo); color: var(--azul-profundo); background: transparent; margin-top: 10px; }
+        .btn-outline-custom:hover { background: var(--azul-profundo); color: var(--blanco); }
+
+        .gifts-section { padding: 80px 0; text-align: center; background-color: var(--azul-claro); }
+        footer { background-color: var(--azul-profundo); color: var(--blanco); padding: 40px 0; text-align: center; }
+        .modal-header { background-color: var(--azul-profundo); color: var(--blanco); }
+        .btn-close { filter: invert(1); }
+    </style>
 </head>
 <body>
-<hr />
-<blockquote>
-<p align="center" style="font-size: 100px;"> <b> LIDYZ </b>
-</p>
-  <blockquote>
-    <p align="center"><a href="#texto1"> Qui&eacute;nes somos? </a></p>
-    <p align="center"><a href="#texto2"> Misi&oacute;n </a></p>
-    <p align="center"><a href="#texto3"> Visi&oacute;n </a></p>
-    <p align="center"><a href="#texto4"> Objetivos </a></p>
-    <p align="center"><a href="#texto5"> Conoce m&aacute;s sobre nosotros </a></p>
-  </blockquote>
-  <hr />
+<!-- nombre de lo que saldra al inicio -->
+    <div id="intro-overlay">
+        <h1 class="display-1" data-aos="zoom-in">Karla & Saratiel</h1>
+        <p class="lead">Nuestra Boda</p>
+        <button class="btn-abrir" onclick="abrirInvitacion()">Abrir Invitación</button>
+    </div>
+<!-- foto de la pareja + datos -->
+    <div class="container hero-section">
+        <div class="row w-100 align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0 text-center" data-aos="fade-right">
+				<!-- foto de la pareja  -->
+              <img src="https://i.pinimg.com/736x/33/a8/4b/33a84b775121a4387ffa13f90536edb0.jpg" alt="Novios" class="hero-img">
+            </div>
+            <div class="col-md-6 text-center text-md-end" data-aos="fade-left">
+                <h1 class="display-2" style="color: var(--azul-profundo);">Harry & Styles</h1>
+                <h3 class="mt-3">18 de Julio, 2026</h3>
+                <p class="lead">¡Nos encantaría que formaras parte de este día!</p>
+            </div>
+        </div>
+    </div>
+<!-- frase de la cuenta regresiva y conteo regresivo -->
+     <div class="countdown-section">
+        <div class="container" data-aos="fade-up">
+            <h2 class="display-4 mb-3">¡Nos Casamos!</h2>
+            <p class="mb-4 fst-italic">"Aquellos a quienes amamos nunca nos abandonan, hay cosas que la muerte no puede tocar, la pintura, los recuerdos y el amor"</p>
+            <p class="mb-4 fst-italic"> - Albus Dumbledore</p>
+            <p class="mb-4 fst-italic"> Faltan...</p>
+           <script>(function(d, s, id) { var js, pjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//www.tickcounter.com/static/js/loader.js"; pjs.parentNode.insertBefore(js, pjs); }(document, "script", "tickcounter-sdk"));</script><a data-type="countdown" data-id="9281404" class="tickcounter" style="display:block; left:0; width:100%; height:0; position:relative; padding-bottom:25%; margin:0 auto;" 
+           title="Cuenta regresiva" href="//www.tickcounter.com/">Cuenta regresiva</a>
+           </div>
+    </div>
+<!-- contenido de la direccion, recepcion, celebracion, etc. con enlace directo a google maps -->
+    <div class="celebration-section">
+        <div class="container" data-aos="zoom-in">
+            <h2 class="mb-4">Recepción y Celebración</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <h3>Salón Social Abby</h3>
+                    <p class="fs-4">Hora de recepción: 6:00 PM</p>
+                    <hr style="border-color: white; width: 50%; margin: 20px auto;">
+                     <p class="mb-1">Gral. Lázaro Cárdenas 48, Pob Delejido Francisco Villa</p>
+                    <p> Tijuana, B.C. CP: 22236 </p>
+                    <a href="https://maps.google.com/?q=Salón+Social+Abby+Tijuana" target="_blank" class="btn-maps">
+                        <i class="bi bi-geo-alt-fill"></i> Ver Ubicación
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- confirmacion de asistencia y correo vinculado mediante formsubmit, NO EDITAR, solo editar el id y el enlace de F.S -->
+    <div class="rsvp-section">
+        <div class="container">
+            <h2 class="text-center mb-5" style="color: var(--azul-profundo);">Confirmación de Asistencia</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6 shadow p-4 rounded bg-white" data-aos="flip-left">
+                    <form id="formRSVP" action="https://formsubmit.co/jannethontiveroscastillo@gmail.com" method="POST">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_subject" value="Nueva Confirmación Boda">
 
-  <p align="center" style="font-size: 30px;"><a name="texto1" id="texto1"></a><b> Qui&eacute;nes somos? </b> </p>
+                        <div class="mb-3 text-center">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="asistencia" id="siAsisto" value="Si" checked>
+                                <label class="form-check-label" for="siAsisto">¡Sí podré asistir!</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="asistencia" id="noAsisto" value="No">
+                                <label class="form-check-label" for="noAsisto">No podré asistir</label>
+                            </div>
+                        </div>
 
-<p> En LIDYZ, somos m&aacute;s que una marca de moda: somos una comunidad comprometida con el estilo consciente, la innovaci&oacute;n responsable y el respeto por nuestro planeta. 
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre Completo (Obligatorio)</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
 
-Nacimos con la convicci&oacute;n de que la moda puede ser bella, funcional y &eacute;tica al mismo tiempo, y trabajamos cada d&iacute;a para demostrar que vestir bien no tiene que costarle al mundo.
+                        <div class="mb-3">
+                            <label for="acompanantes" class="form-label">Cantidad de Acompañantes</label>
+                            <input type="number" class="form-control" id="acompanantes" name="acompanantes" min="0" value="0">
+                        </div>
 
-Nuestra esencia se basa en tres pilares fundamentales:
+                        <button type="submit" class="btn btn-registar" id="btnRSVP">Registrar Asistencia</button>
+                        <div id="msgRSVP" class="mt-3 text-center" style="display:none; color: #1e3a8a; font-weight: bold;">¡Gracias! Tu asistencia ha sido registrada.</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- descripcion antes de picarle al boton de sugerir musica -->
+    <div class="details-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="fade-up">
+                    <div class="floating-card">
+                        <i class="bi bi-music-note-beamed card-icon"></i>
+                        <h3>Música</h3>
+                        <p>¿Cuál es una canción que no puede faltar?</p>
+                        <button class="btn btn-outline-custom" data-bs-toggle="modal" data-bs-target="#modalMusica">Sugerir canción</button>
+                    </div>
+                </div>
+				<!-- descripcion antes de picarle al boton de dress code -->
+               <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="floating-card">
+                        <i class="bi bi-suit-heart card-icon"></i> <h3>Dress Code</h3>
+                        <p>Detalles sobre el estilo de vestuario</p>
+                        <button class="btn btn-outline-custom" data-bs-toggle="modal" data-bs-target="#modalDressCode">
+                            + Info
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- datos sobre los regalos antes de abrir el boton -->
+     <div class="gifts-section">
+        <div class="container" data-aos="zoom-in">
+            <h2 class="mb-3" style="color: var(--azul-profundo);">Regalos</h2>
+            <p class="mb-4">Durante el evento se estará manejando un cofre para que puedan pasar a dar sus regalos.</p>
+            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalRegalos">Ver Datos</button>
+        </div>
+    </div>
+<!-- agradecimiento -->
+    <footer>
+        <h2 class="script-font">¡Muchas Gracias!</h2>
+        <h3>Karla & Saratiel</h3>
+        <p class="mt-3 text-white-50">18 de Julio, 2026</p>
+    </footer>
+<!-- cuadro de musica, NO EDITAR -->
+    <div class="modal fade" id="modalMusica" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="color:white">Sugerir Canción</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                     <form id="formMusica" action="https://formsubmit.co/jannethontiveroscastillo@gmail.com" method="POST">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_subject" value="¡Nueva sugerencia de música!">
 
-Sostenibilidad: Utilizamos materiales reciclados, org&aacute;nicos y de bajo impacto ambiental. Cada prenda est&aacute; dise&ntilde;ada para durar, reducir residuos y promover un consumo responsable.
+                        <div class="mb-3">
+                            <label class="form-label">Tu nombre (Obligatorio)</label>
+                            <input type="text" name="Nombre_Invitado" class="form-control" placeholder="Escribe tu nombre" required>
+                        </div>
 
-Empoderamiento: Creemos en el poder transformador de la moda. Apoyamos a comunidades locales, artesanos y dise&ntilde;adores que comparten nuestra visi&oacute;n de un futuro m&aacute;s justo.
+                        <div class="mb-3">
+                            <label class="form-label">Canción y Autor</label>
+                            <input type="text" name="Cancion_Sugerida" class="form-control" placeholder="Ej: Perfect - Ed Sheeran" required>
+                        </div>
 
-Transparencia: Nos esforzamos por mantener procesos claros, honestos y trazables. Queremos que nuestros clientes y colaboradores conozcan el origen de cada pieza y el impacto positivo que genera.
+                        <div class="mb-3">
+                            <label class="form-label">Link de YouTube / Spotify (Opcional)</label>
+                            <input type="url" name="Link_Musica" class="form-control" placeholder="https://...">
+                        </div>
 
- </p>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary" id="btnMusica">Enviar Sugerencia</button>
+                        </div>
+                        <div id="msgMusica" class="mt-3 text-center" style="display:none; color: #1e3a8a; font-weight: bold;">¡Sugerencia enviada correctamente!</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- cuadro de dress code, especificar que si llevar en la primera, que no en el text muted small -->
+    <div class="modal fade" id="modalDressCode" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Estilo de Dress Code</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong> Formal / Etiqueta Rigurosa</strong></p>
+                    <p> Los Invitados deberan vestir de manera formal respetando las leyes y normas del evangelio </p>
+                    <p class="text-muted small">Por favor, evitar color blanco y azul.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <p><a href="#arriba">Regresar</a></p>
+<!-- cuadro de regalos, poner si sera a una cuenta los datos o como/que dar de regalo -->
+    <div class="modal fade" id="modalRegalos" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"><h5>Datos Bancarios</h5></div>
+                <div class="modal-body text-center">
+                    <div class="alert alert-primary">
+                        <p><strong>BBVA</strong></p>
+                        <p>CLABE: 4152 3142 4073 5517</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<hr />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+        function abrirInvitacion() { document.getElementById('intro-overlay').style.transform = 'translateY(-100%)'; }
 
-  <p align="center" style="font-size: 30px;"><a name="texto2" id="texto1"></a><b> Misi&oacute;n </b> </p>
-  
-<a> </a>
-<p> 
-Nuestra misi&oacute;n es crear colecciones &uacute;nicas y originales con materiales reciclados para reducir la huella ecol&oacute;gica y a su vez concientizar sobre el consumo radical
+        // Función para enviar formularios sin recargar la página
+        function manejarEnvio(idForm, idBtn, idMsg) {
+            const f = document.getElementById(idForm);
+            f.addEventListener("submit", function(e) {
+                e.preventDefault();
+                const btn = document.getElementById(idBtn);
+                const msg = document.getElementById(idMsg);
+                btn.disabled = true;
+                btn.innerText = "Enviando...";
 
-En nuestra empresa, nos comprometemos a crear colecciones &uacute;nicas y originales que no solo sean est&eacute;ticamente atractivas, sino que también tengan un impacto positivo en el medio ambiente. Nos enfocamos en utilizar materiales reciclados y sostenibles en nuestros productos, con el objetivo de reducir nuestra huella ecol&oacute;gica y promover un enfoque más responsable hacia el consumo.
-</p>
-
-<a> </a>
-
-<h3> Misi&oacute;n General </h3>
-<p>
-En LIDYZ, somos m&aacute;s que una marca de moda: somos una comunidad comprometida con el estilo consciente, la innovaci&oacute;n responsable y el respeto por nuestro planeta. 
-
-Nacimos con la convicci&oacute;n de que la moda puede ser bella, funcional y &eacute;tica al mismo tiempo, y trabajamos cada d&iacute;a para demostrar que vestir bien no tiene que costarle al mundo.
-
-Nuestra esencia se basa en tres pilares fundamentales:
-
-Sostenibilidad: Utilizamos materiales reciclados, org&aacute;nicos y de bajo impacto ambiental. Cada prenda est&aacute; dise&ntilde;ada para durar, reducir residuos y promover un consumo responsable.
-
-Empoderamiento: Creemos en el poder transformador de la moda. Apoyamos a comunidades locales, artesanos y dise&ntilde;adores que comparten nuestra visi&oacute;n de un futuro m&aacute;s justo.
-
-Transparencia: Nos esforzamos por mantener procesos claros, honestos y trazables. Queremos que nuestros clientes y colaboradores conozcan el origen de cada pieza y el impacto positivo que genera.
-
-</p> 
-
-  <p><a href="#arriba">Regresar</a></p>
-
-  <hr />
-  <p align="center" style="font-size: 30px;"><a name="texto1" id="texto3"></a><b> Visi&oacute;n </b> </p>
-  
-<p> 
-
-Nos vemos como una empresa l&iacute;der en la industria de la moda sostenible, reconocida por nuestra innovaci&oacute;n y compromiso con el medio ambiente. A largo plazo, aspiramos a ser una empresa creciente y rentable que haya tenido un impacto esencial en la sociedad, capaz de lograr un impulso ecol&oacute;gico significativo en la industria y en la comunidad.
-
-Nos esforzamos por dejar un legado duradero en la industria de la moda y en la sociedad, y por inspirar a futuras generaciones a cuidar el m&eacute;dio ambiente y a promover pr&aacute;cticas sostenibles. Creemos que nuestra visi&oacute;n y nuestros objetivos pueden hacer una diferencia positiva en el mundo, y nos comprometemos a trabajar hacia un futuro m&aacute;s sostenible y responsable.
-
-</p>
-
-  <p><a href="#arriba">Regresar</a></p>
-
-  <hr />
-
- 
-   <p align="center" style="font-size: 30px;"><a name="texto4" id="texto4"></a><b> Objetivos </b> </p>
- 
-<p>
-Nos vemos como una empresa creciente a largo plazo, que ha tenido un impacto en la sociedad, capaz de lograr un impulso ecol&oacute;gico y de esa manera poder demostrar que se puede hacer un emprendimiento y reducir el impacto ambiental que este puede llegar a generar.  
-</p>
-
-<hr/>
-
-<h3>Corto Plazo (6 &#45; 12 meses)</h3>
-
-<p>
- Incrementar ventas en un 20% Mejorar nuestras estrategias de marketing y ventas tanto online como f&iacute;sicas para alcanzar un crecimiento del 20% en ingresos en los pr&oacute;ximos 6 a 12 meses. Fortalecer presencia digital Aumentar la comunidad en redes sociales (Instagram, Facebook y TikTok) en un 50%, generando contenido de valor, campa&ntilde;as colaborativas y estrategias de engagement para aumentar el reconocimiento de marca. Lanzar una nueva colecci&oacute;n sostenible Dise&ntilde;ar y lanzar una colecci&oacute;n que combine moda, innovaci&oacute;n y sostenibilidad, con materiales reciclados certificados, dirigida a un p&uacute;blico joven y consciente. Establecer alianzas estrat&eacute;gicas Colaborar con al menos 2 organizaciones ambientales para realizar campa&ntilde;as conjuntas, donaciones o eventos que refuercen nuestro compromiso ecol&oacute;gico y generen visibilidad de marca. 
-</p>
-
-<hr/>
-
-<h3>Mediano Plazo (1 &#45; 2 a&ntilde;os)</h3>
-
-<p>
- Expandir la marca a nuevos mercados Iniciar distribuci&oacute;n en nuevos puntos de venta nacionales y explorar oportunidades internacionales a trav&eacute;s de ferias, e-commerce global y colaboraciones con marcas afines. Dise&ntilde;ar una estrategia integral de sostenibilidad Crear un plan estructurado que abarque todos los procesos: desde la selecci&oacute;n de proveedores hasta la log&iacute;stica, con metas claras para reducir el impacto ambiental en cada etapa. Lanzar un programa de fidelidad Implementar un sistema de recompensas para clientes frecuentes, con beneficios como descuentos, acceso anticipado a lanzamientos, eventos exclusivos y contenido educativo sobre sostenibilidad. Desarrollar una tienda online robusta Lanzar una plataforma de comercio electr&oacute;nico moderna, intuitiva y ecol&oacute;gica (con tecnolog&iacute;as que reduzcan la huella digital), optimizada para una experiencia de compra responsable y transparente. 
-</p>
-
-<hr/>
-
-<h3>Largo Plazo (2 &#45; 5 a&ntilde;os)</h3>
-
-<p>
-Ser un referente en moda sostenible Posicionarnos como una marca l&iacute;der en el &aacute;mbito de la moda ecol&oacute;gica en Am&eacute;rica Latina, reconocida por su compromiso ambiental, innovaci&oacute;n en materiales reciclados y enfoque inclusivo. Reducir nuestro impacto ambiental en un 50% Lograr una reducci&oacute;n significativa en emisiones, consumo de agua, residuos y energ&iacute;a mediante innovaci&oacute;n, optimizaci&oacute;n de procesos y educaci&oacute;n interna. Consolidar una red de proveedores sostenibles Establecer relaciones s&oacute;lidas con proveedores locales e internacionales que compartan nuestros valores de sostenibilidad, trazabilidad y &eacute;tica laboral. Crear un fondo ambiental Desarrollar e implementar un fondo para apoyar proyectos comunitarios y ambientales, con un porcentaje fijo de nuestras ventas destinado a iniciativas de reforestaci&oacute;n, reciclaje o educaci&oacute;n ambiental.
-  </p>
-  
-  <p><a href="#arriba">Regresar</a></p>
-
-  <hr />
- 
-  <p align="center" style="font-size: 30px;"><a name="texto5" id="texto5"></a><b> Conoce m&aacute;s sobre nosotros </b> </p>
- 
-<hr/>
-
-<h3> Fundaci&oacute;n</h3>
-
-  <p>
-LIDYZ fue fundada en el a&ntilde;o 2020 por un grupo de cinco profesionistas, quienes quisieron abogar por el futuro de la moda sostenible para reducir el impacto ecol&oacute;gico de la industria de la moda. Siendo Ontiveros Castillo Zuemmy Alexandra la due&ntilde;a oficial, quien lidera una empresa preocupada por el ambiente.
- </p>
- <hr/>
-
- <h3> A qu&eacute; nos dedicamos </h3>
-
- <p>
-Somos una empresa dedicada a la producci&oacute;n y venta de ropa y accesorios sostenibles, utilizando materiales reciclados y procesos menos contaminantes. Algunas pr&aacute;cticas comunes que tenemos son:
-
-	Uso de materiales sostenibles: por ejemplo algod&oacute;n org&aacute;nico, lino de bamb&uacute;, ca&ntilde;amo org&aacute;nico y materiales reciclados como telas y prendas de segunda mano.
-	Producci&oacute;n local: para reducir la huella de carbono y apoyar a las comunidades locales.
-	Dise&ntilde;o atemporal: creando prendas duraderas y de alta calidad que no sigan las tendencias fast fashion.
-	Transparencia: compartiendo informaci&oacute;n sobre las pr&aacute;cticas de fabricaci&oacute;n y el origen de los materiales.
-	Certificaciones: como GOTS o FairTrade Cotton, que garantizan la sostenibilidad y la equidad en la producci&oacute;n.
- </p>
-
-<hr/>
-
- <h3> Desarrollo de la Empresa </h3>
-
- <p>
-Nuestra aventura comenz&oacute; con una visi&oacute;n sencilla pero poderosa: transformar lo que otros consideran desechos en productos &uacute;tiles y bellos. Al principio, &eacute;ramos un peque&ntilde;o equipo trabajando desde casa, sin local ni maquinaria industrial. Us&aacute;bamos cart&oacute;n, pl&aacute;stico y retazos de tela reciclados para crear art&iacute;culos que vend&iacute;amos en nuestra comunidad local. La aceptaci&oacute;n fue inmediata, y pronto nos vimos impulsados a dar el siguiente paso: abrir un taller en la ciudad.
-
-A medida que la empresa creci&oacute;, expandimos las instalaciones, diversificamos la cartera de productos, innovamos y creamos dise&ntilde;os &uacute;nicos, siempre teniendo en cuenta nuestra huella ecol&oacute;gica.
-
-En los &uacute;ltimos a&ntilde;os, hemos experimentado un crecimiento significativo, pudiendo cubrir nuevos mercados y contratando a un equipo de profesionales que mejoran la vista de los productos y as&iacute; ofrecer una mejor calidad y durabilidad.
-
-D&iacute;a a d&iacute;a trabajamos arduamente para mejorar e innovar nuevas cosas, hallando la forma m&aacute;s factible de estar a la vanguardia de la moda con un estilo &uacute;nico, sin que el ambiente sufra las consecuencias.
- </p>
-
-<hr/>
- 
-  <p><a href="#arriba">Regresar</a></p>
-  <hr />
-
-</blockquote>
+                fetch(f.action, {
+                    method: "POST",
+                    body: new FormData(f),
+                    headers: { 'Accept': 'application/json' }
+                }).then(() => {
+                    btn.style.display = "none";
+                    msg.style.display = "block";
+                    if(idForm === "formMusica") {
+                        setTimeout(() => {
+                            bootstrap.Modal.getInstance(document.getElementById('modalMusica')).hide();
+                        }, 2500);
+                    }
+                }).catch(() => {
+                    alert("Error al enviar. Intenta de nuevo.");
+                    btn.disabled = false;
+                    btn.innerText = "Reintentar";
+                });
+            });
+        }
+        manejarEnvio("formRSVP", "btnRSVP", "msgRSVP");
+        manejarEnvio("formMusica", "btnMusica", "msgMusica");
+    </script>
 </body>
 </html>
